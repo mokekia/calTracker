@@ -12,7 +12,7 @@ const getFoodEntries = async (req, res) => {
 const createFoodEntry = async (req, res) => {
   try {
     const calculatedCalories = (req.body.weight * req.body.kcalPer100g) / 100
-    const result = await FoodEntry.create({...req.body, calculatedCalories})
+    const result = await FoodEntry.create({...req.body, mealId: req.params.mealId, calculatedCalories})
     res.status(201).json(result)
   } catch (error) {
     res.status(400).json({ message: error.message })

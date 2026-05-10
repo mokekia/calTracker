@@ -20,7 +20,7 @@ const getAllMealsByDate = async (req, res) => {
 
 const createMeal = async (req, res) => {
   try {
-    const result = await Meal.create(req.body)
+    const result = await Meal.create({...req.body, userId: req.params.userId})
     res.status(201).json(result)
   } catch (error) {
     res.status(404).json({ message: error.message })
