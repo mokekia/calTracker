@@ -11,6 +11,10 @@ const getFoodEntries = async (req, res) => {
 
 const createFoodEntry = async (req, res) => {
   try {
+    const {name, weight, kcalPer100g} = req.body
+    if(!name || !weight || !kcalPer100g) {
+      return res.status(400).json({ message: 'All fieldsare required' })
+    }
     const calculatedCalories = (req.body.weight * req.body.kcalPer100g) / 100
     const result = await FoodEntry.create({...req.body, mealId: req.params.mealId, calculatedCalories})
     res.status(201).json(result)
@@ -21,6 +25,9 @@ const createFoodEntry = async (req, res) => {
 
 const updateFoodEntry = async (req, res) => {
   try {
+    if(Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: 'No fields to update' })
+    }
     const existing = await FoodEntry.findById(req.params.id)
     if(!existing) return res.status(404).json({ message: 'Food entry not found' })
     

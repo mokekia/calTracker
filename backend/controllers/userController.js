@@ -22,6 +22,9 @@ const getUser = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     const {name, weight, height, age, activityLevel, goal, gender} = req.body
+    if(!name || !weight || !height || !age || !gender || !activityLevel || goal === undefined ){
+      return res.status(400).json({ message: 'All fields are required' })
+    }
     let BMR // Amount of calories needed to function when resting 
     if(gender === "male"){
       BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
@@ -49,6 +52,9 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
+    if(Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: 'No fields to update' })
+    }
     const result = await User.findByIdAndUpdate(req.params.id, req.body, {new: true}) // new: true gives back the updated document 
     if (!result) return res.status(404).json({ message: 'User not found' })
     res.status(200).json(result)

@@ -20,6 +20,11 @@ const getAllMealsByDate = async (req, res) => {
 
 const createMeal = async (req, res) => {
   try {
+    const {mealType, date, totalCalories} = req.body
+    if(!mealType|| !date || totalCalories === undefined ){
+      return res.status(400).json({ message: 'All fields are required' })
+    }
+
     const result = await Meal.create({...req.body, userId: req.params.userId})
     res.status(201).json(result)
   } catch (error) {
@@ -29,6 +34,9 @@ const createMeal = async (req, res) => {
 
 const updateMeal = async (req, res) => {
   try {
+    if(Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: 'No fields to update' })
+    }
     const result = await Meal.findByIdAndUpdate(req.params.id, req.body, { new: true })
     if(!result) return res.status(404).json('Meal not found')
     res.status(200).json(result)
