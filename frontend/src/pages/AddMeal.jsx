@@ -30,11 +30,15 @@ function AddMeal() {
   },[])
   
   const handleDelete = async (id) => {
-    const result = await fetch(`http://localhost:5000/api/foodentries/${id}`,{
-      method: 'DELETE'
+    const confirmed = window.confirm('Are you sure you want to delete this entry?')
+    if(confirmed){
+      const result = await fetch(`http://localhost:5000/api/foodentries/${id}`,{
+      method: 'DELETE'    
     })
-    
     setFoodEntries(prev => prev.filter(entry => entry._id !== id))
+    }
+    
+    
 
   }
   if(loading) return <h1>Loading...</h1>
