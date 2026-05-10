@@ -8,9 +8,9 @@ const app = express() // Instance of server
 
 // Middlewear
 app.use(express.json()) // Conversion fron JSON to JavaScript object
-
-// Routes
-
+app.use('/api/users', require('./routes/userRoutes'))
+app.use('/api/meals', require('./routes/mealRoutes'))
+app.use('/api/foodentries', require('./routes/foodEntryRoutes'))
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`)
