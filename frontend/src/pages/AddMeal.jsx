@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import MealForm from '../components/MealForm'
 function AddMeal() {
   const { mealId } = useParams()
   const [foodEntries, setFoodEntries] = useState(null)
@@ -40,6 +41,8 @@ function AddMeal() {
           <p>{entry.name} - {entry.calculatedCalories} kcal</p>
         </div>
       ))}
+
+      <MealForm mealId={mealId}/>
 
     </div>
   )
