@@ -21,7 +21,14 @@ const createFoodEntry = async (req, res) => {
 
 const updateFoodEntry = async (req, res) => {
   try {
-    const result = await FoodEntry.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    const existing = await FoodEntry.findById(req.params.id)
+    if(!existing) return res.status(404).json({ message: 'Food entry not found' })
+    
+    const weight = req.body.weight ?? existing.weight
+    const kcalPer100g = req.body.kcalPer100g ?? existing.kcalPer100g
+
+    const calculatedCalories = (weight * kcalPer100g) / 100
+    const result = await FoodEntry.findByIdAndUpdate(req.params.id,{...req.body, calculatedCalories}, { new: true })
     if(!result) return res.status(404).json({ message: 'Food entry not found' })
     res.status(200).json(result)
   } catch (error) {
