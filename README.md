@@ -12,7 +12,7 @@ CalTracker is a calorie tracking application for people who want to manage their
 
 3. Create a env. file in the backend folder with:
 - PORT=5000
-- CONNECTION_URL=mongodb+srv://<username>:<password>@cluster0.dqmuudq.mongodb.net/calTracker?appName=Cluster0
+- `CONNECTION_URL=mongodb+srv://<username>:<password>@cluster0.dqmuudq.mongodb.net/calTracker?appName=Cluster0`
 
 4. Run the app from the root folder by typing:
 - npm run dev
