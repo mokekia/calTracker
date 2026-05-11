@@ -51,6 +51,9 @@ const deleteFoodEntry = async (req, res) => {
   try {
     const result = await FoodEntry.findByIdAndDelete(req.params.id)
     if(!result) return res.status(404).json({ message: 'Food entry not found' })
+    await Meal.findByIdAndUpdate(result.mealId, {
+      $inc: { totalCalories: -result.calculatedCalories }
+    })
     res.status(200).json(result)
   } catch (error) {
     res.status(400).json({ message: error.message })
