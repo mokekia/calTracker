@@ -3,18 +3,19 @@ CalTracker is a calorie tracking application for people who want to manage their
 
 
 ## Setup
-1. Clone the repository: https://github.com/mokekia/calTracker.git
+1. Clone the repository: 
+- https://github.com/mokekia/calTracker.git
 
 2. Install the dependencies by typing the following from the root folder:
-cd backend && npm install
-cd ../frontend && npm install
+- cd backend && npm install
+- cd ../frontend && npm install
 
 3. Create a env. file in the backend folder with:
-PORT=5000
-CONNECTION_URL=your_mongodb_connection_string
+- PORT=5000
+- CONNECTION_URL=mongodb+srv://<username>:<password>@cluster0.dqmuudq.mongodb.net/calTracker?appName=Cluster0
 
 4. Run the app from the root folder by typing:
-npm run dev
+- npm run dev
 
 ## Tech Stack
 - Frontend: React (Vite)
