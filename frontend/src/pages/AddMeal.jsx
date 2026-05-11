@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import MealForm from '../components/MealForm'
 function AddMeal() {
   const { mealId } = useParams()
@@ -7,6 +7,7 @@ function AddMeal() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [search, setSearch] = useState("")
+  const navigate = useNavigate()
   useEffect(() => {
     const fetchFoodEntries = async () => {
       try {
@@ -57,6 +58,7 @@ function AddMeal() {
       
       <MealForm mealId={mealId}/>
 
+      <button onClick={() => navigate('/')}>Back to dashboard</button>
     </div>
   )
 }
