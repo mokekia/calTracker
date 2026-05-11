@@ -4,7 +4,7 @@ import ProgressBar from "../components/ProgressBar"
 import MealCard from "../components/MealCard"
 const API_URL = import.meta.env.VITE_API_URL
 function Dashboard() {
-  const USER_ID = '6a01beae725c39206ef8241e'
+  const USER_ID = '6a02387bb60fefed3475f166'
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [stats, setStats] = useState({
