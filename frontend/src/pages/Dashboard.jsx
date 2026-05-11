@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import ProgressBar from "../components/ProgressBar"
 import MealCard from "../components/MealCard"
+const API_URL = import.meta.env.VITE_API_URL
 function Dashboard() {
   const USER_ID = '6a01beae725c39206ef8241e'
   const [loading, setLoading] = useState(true)
@@ -17,7 +18,7 @@ function Dashboard() {
     // Get user from backend
       const fetchStats = async () => {
         try {
-          const result = await fetch(`http://localhost:5000/api/stats/${USER_ID}/calories-today`)
+          const result = await fetch(`${API_URL}/api/stats/${USER_ID}/calories-today`)
           const data = await result.json()
           setStats(data)
           setLoading(false)  
@@ -28,7 +29,7 @@ function Dashboard() {
     }
       const fetchMeals = async () => {
         try {
-          const result = await fetch(`http://localhost:5000/api/meals/${USER_ID}`)
+          const result = await fetch(`${API_URL}/api/meals/${USER_ID}`)
           const data = await result.json()
           setMeals(data)
           setLoading(false)  
@@ -57,7 +58,7 @@ function Dashboard() {
       navigate(`/meal/${existing._id}`)
     }else{
       try {
-        const result = await fetch(`http://localhost:5000/api/meals/${USER_ID}`, {
+        const result = await fetch(`${API_URL}/api/meals/${USER_ID}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

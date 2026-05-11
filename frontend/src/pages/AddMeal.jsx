@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import MealForm from '../components/MealForm'
+const API_URL = import.meta.env.VITE_API_URL
 function AddMeal() {
   const { mealId } = useParams()
   const [foodEntries, setFoodEntries] = useState(null)
@@ -11,7 +12,7 @@ function AddMeal() {
   useEffect(() => {
     const fetchFoodEntries = async () => {
       try {
-        const result = await fetch(`http://localhost:5000/api/foodentries/${mealId}`)
+        const result = await fetch(`${API_URL}/api/foodentries/${mealId}`)
         const data = await result.json()
         setFoodEntries(data)
         setLoading(false)
@@ -33,7 +34,7 @@ function AddMeal() {
   const handleDelete = async (id) => {
     const confirmed = window.confirm('Are you sure you want to delete this entry?')
     if(confirmed){
-      const result = await fetch(`http://localhost:5000/api/foodentries/${id}`,{
+      const result = await fetch(`${API_URL}/api/foodentries/${id}`,{
       method: 'DELETE'    
     })
     setFoodEntries(prev => prev.filter(entry => entry._id !== id))

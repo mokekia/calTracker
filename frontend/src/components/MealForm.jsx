@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+const API_URL = import.meta.env.VITE_API_URL
 function MealForm({ mealId }) {
   const [name, setName] = useState('')
   const [weight, setWeight] = useState('')
@@ -7,7 +7,7 @@ function MealForm({ mealId }) {
   
   const handleSubmit = async () => {
     try {
-      const result = await fetch(`http://localhost:5000/api/foodentries/${mealId}`, {
+      const result = await fetch(`${API_URL}/api/foodentries/${mealId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
