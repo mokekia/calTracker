@@ -3,10 +3,14 @@ import { useNavigate } from "react-router-dom"
 import ProgressBar from "../components/ProgressBar"
 import MealCard from "../components/MealCard"
 function Dashboard() {
-  const USER_ID = '69fff9cc747e655c2e850c69'
+  const USER_ID = '6a01beae725c39206ef8241e'
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [stats, setStats] = useState(0)
+  const [stats, setStats] = useState({
+    caloriesEaten: 0,
+    dailyCalorieGoal: 0,
+    caloriesLeft: 0
+  })
   const [meals, setMeals] = useState([])
   const navigate = useNavigate()
   useEffect(() => {
@@ -80,13 +84,15 @@ function Dashboard() {
   const dinnerMeal = meals.find(meal => meal.mealType === 'dinner' && new Date(meal.date).toDateString() === today)
   const snacksMeal = meals.find(meal => meal.mealType === 'snacks' && new Date(meal.date).toDateString() === today)
   return (
-    <div>
+    <div className="dashboard">
       <ProgressBar caloriesEaten={stats.caloriesEaten} dailyCalorieGoal={stats.dailyCalorieGoal} caloriesLeft={stats.caloriesLeft}/>
-      <p>Calories eaten: {stats.caloriesEaten}</p>
-      <p>Daily calorie goal: {stats.dailyCalorieGoal}</p>
-      <p>Calories left: {stats.caloriesLeft}</p>
-      
-      <div>
+      <div className="stats">
+        <p>Calories eaten: {stats.caloriesEaten}</p>
+        <p>Daily calorie goal: {stats.dailyCalorieGoal}</p>
+        <p>Calories left: {stats.caloriesLeft}</p>
+      </div>
+        
+      <div className="meal-cards">
         <MealCard mealType='breakfast' totalCalories={breakfastMeal ? breakfastMeal.totalCalories : 0} onClick={() => handleMealClick('breakfast')}/>
         <MealCard mealType='lunch' totalCalories={lunchMeal ? lunchMeal.totalCalories : 0} onClick={() => handleMealClick('lunch')}/>
         <MealCard mealType='dinner' totalCalories={dinnerMeal ? dinnerMeal.totalCalories : 0} onClick={() => handleMealClick('dinner')}/>

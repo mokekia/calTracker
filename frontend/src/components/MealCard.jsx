@@ -1,9 +1,9 @@
 function MealCard({ mealType, totalCalories, onClick }) {
   return (
-    <div>
+    <div className="meal-card">
       <p>{mealType}</p>
       <p>{totalCalories}</p>
-      <button onClick={onClick}>Add food</button>
+      <button className="btn" onClick={onClick}>Add food</button>
     </div>
   )
 }

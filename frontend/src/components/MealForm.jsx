@@ -28,10 +28,10 @@ function MealForm({ mealId }) {
 
   return (
     <form>
-      <input type="text" placeholder='name' value={name} onChange={(e) => setName(e.target.value)}/>
-      <input type="number" placeholder='weight (g)' value={weight} onChange={(e) => setWeight(e.target.value)}/>
-      <input type="number" placeholder='Kcal per 100g' value={kcalPer100g} onChange={(e) => setKcalPer100g(e.target.value)}/>
-      <button onClick={() => handleSubmit()}>Add</button>
+      <input className='input' type="text" placeholder='name' value={name} onChange={(e) => setName(e.target.value)}/>
+      <input className='input' type="number" placeholder='weight (g)' value={weight} onChange={(e) => setWeight(e.target.value)}/>
+      <input className='input' type="number" placeholder='Kcal per 100g' value={kcalPer100g} onChange={(e) => setKcalPer100g(e.target.value)}/>
+      <button className="btn" onClick={() => handleSubmit()}>Add</button>
     </form>
   )
 }

@@ -49,16 +49,16 @@ function AddMeal() {
       
       <h1>Add Meal</h1>
       <h2>Food Entries</h2>
-      <input type="text" placeholder='Search' value={search} onChange={(e) => setSearch(e.target.value)}/>      
+      <input className='input' type="text" placeholder='Search' value={search} onChange={(e) => setSearch(e.target.value)}/>      
       {foodEntries.filter(entry => entry.name.toLowerCase().includes(search.toLowerCase())).map(entry => 
         <div key={entry._id}>
-          <p>{entry.name} - {entry.calculatedCalories} kcal</p> <button onClick={() => handleDelete(entry._id)}>Delete</button>
+          <p>{entry.name} - {entry.calculatedCalories} kcal</p> <button className='btn' onClick={() => handleDelete(entry._id)}>Delete</button>
         </div>
       )}
       
       <MealForm mealId={mealId}/>
 
-      <button onClick={() => navigate('/')}>Back to dashboard</button>
+      <button className='btn' onClick={() => navigate('/')}>Back to dashboard</button>
     </div>
   )
 }
