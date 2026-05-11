@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import ProgressBar from "../components/ProgressBar"
 function Dashboard() {
   const USER_ID = '69fff9cc747e655c2e850c69'
   const [loading, setLoading] = useState(true)
@@ -45,7 +46,8 @@ function Dashboard() {
 
 
   const handleMealClick = async (mealType) => {
-    const existing = meals.find(meal => meal.mealType === mealType)
+    const today = new Date().toDateString()
+    const existing = meals.find(meal => meal.mealType === mealType && new Date(meal.date).toDateString() === today)
     if(existing) {
       navigate(`/meal/${existing._id}`)
     }else{
@@ -72,6 +74,7 @@ function Dashboard() {
   if(error) return <h1>Error: {error}</h1>
   return (
     <div>
+      <ProgressBar caloriesEaten={stats.caloriesEaten} dailyCalorieGoal={stats.dailyCalorieGoal} caloriesLeft={stats.caloriesLeft}/>
       <p>Calories eaten: {stats.caloriesEaten}</p>
       <p>Daily calorie goal: {stats.dailyCalorieGoal}</p>
       <p>Calories left: {stats.caloriesLeft}</p>
